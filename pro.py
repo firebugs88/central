@@ -11,6 +11,16 @@ from queue import Queue
 from typing import Optional
 import contextlib
 
+@contextlib.contextmanager
+def get_cursor(self):
+    cursor  = self.conn.cursor()
+    try:
+        yield cursor
+        self.conn.commit()
+    except Exception as e:
+        self.conn.rollback()
+        raise e
+
 # Configurar logging
 logging.basicConfig(
     level=logging.INFO,

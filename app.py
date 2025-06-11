@@ -263,6 +263,24 @@ class NovedadesGUI:
         if not selected_item:
             messagebox.showwarning("Advertencia", "Por favor, selecciona una novedad para editar.")
             return
+        
+        # obtener el texto de la entrada
+        nueva_novedad = self.entrada_novedad.get().strip()
+
+        # validar que la entrada no esté vacía
+        if not nueva_novedad:
+            messagebox.showwarning("Advertencia", "El campo de novedad no puede estar vacío.")
+            return
+        
+        # validar que la entrada no sea demasiado larga
+        if len(nueva_novedad) > 255:
+            messagebox.showwarning("Advertencia", "La Novedad Es Demasiado Larga.")
+            return
+        
+        # obtener el ID de la novedad seleccionada
+        if len(selected_item) != 1:
+            messagebox.showwarning("Advertencia", "Por favor, selecciona una sola novedad para editar.")
+            return
 
         item = self.tree.item(selected_item)
         novedad_id = item['values'][0]
